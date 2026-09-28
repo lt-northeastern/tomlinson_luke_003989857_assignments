@@ -11,10 +11,25 @@ import java.util.ArrayList;
  * @author luke
  */
 public class VehicleDirectory {
-    ArrayList <Vehicle> vehicles;
-    
-    public VehicleDirectory (){
+
+    ArrayList<Vehicle> vehicles;
+
+    public VehicleDirectory() {
         vehicles = new ArrayList<Vehicle>();
     }
+
+    public Vehicle addNewVehicle() {
+        Vehicle newVehicle = new Vehicle();
+        vehicles.add(newVehicle);
+        return newVehicle;
+    }
+
+    public void removeVehicle(Vehicle v) {
+        vehicles.remove(v);
+    }
     
+    public ArrayList<Vehicle> getVehicles(){
+        return vehicles;
+    }
+
 }

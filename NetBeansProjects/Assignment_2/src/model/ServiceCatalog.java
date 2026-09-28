@@ -11,19 +11,27 @@ import java.util.ArrayList;
  * @author luke
  */
 public class ServiceCatalog {
+
     ArrayList<Service> services;
-    
-    public ServiceCatalog (){
+
+    public ServiceCatalog() {
         services = new ArrayList<Service>();
     }
-    
-    public Service addNewService(){
-        Service newService = new Service ();
+
+    public Service addNewService() {
+        Service newService = new Service();
         services.add(newService);
         return newService;
-       
-        
-        
-}
-    
+
+    }
+
+    public void removeService(Service s) {
+        services.remove(s);
+    }
+
+    public ArrayList<Service> getServices() {
+        return services;
+
+    }
+
 }
