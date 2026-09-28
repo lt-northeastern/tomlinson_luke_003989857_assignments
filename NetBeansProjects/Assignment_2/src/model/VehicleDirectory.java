@@ -4,10 +4,17 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author luke
  */
 public class VehicleDirectory {
+    ArrayList <Vehicle> vehicles;
+    
+    public VehicleDirectory (){
+        vehicles = new ArrayList<Vehicle>();
+    }
     
 }

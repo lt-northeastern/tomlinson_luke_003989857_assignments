@@ -4,10 +4,26 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author luke
  */
 public class ServiceCatalog {
+    ArrayList<Service> services;
+    
+    public ServiceCatalog (){
+        services = new ArrayList<Service>();
+    }
+    
+    public Service addNewService(){
+        Service newService = new Service ();
+        services.add(newService);
+        return newService;
+       
+        
+        
+}
     
 }
