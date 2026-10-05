@@ -4,8 +4,6 @@
  */
 package ui;
 
-import model.Service;
-
 /**
  *
  * @author luke
@@ -15,11 +13,8 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    Service service;
-
     public MainJFrame() {
         initComponents();
-        service = new Service();
     }
 
     /**
@@ -31,108 +26,21 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        SplitPane = new javax.swing.JSplitPane();
-        controlPanel = new javax.swing.JPanel();
-        btnManageServices = new javax.swing.JButton();
-        btnRegisterVehicles = new javax.swing.JButton();
-        btnSearchVehicles = new javax.swing.JButton();
-        btnListVehicles = new javax.swing.JButton();
-        workArea = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        controlPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnManageServices.setText("Manage Services");
-        btnManageServices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageServicesActionPerformed(evt);
-            }
-        });
-
-        btnRegisterVehicles.setText("Register Vehicle");
-        btnRegisterVehicles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterVehiclesActionPerformed(evt);
-            }
-        });
-
-        btnSearchVehicles.setText("Search Vehicle");
-
-        btnListVehicles.setText("List Vehicles");
-
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnSearchVehicles))
-                    .addComponent(btnManageServices)
-                    .addComponent(btnRegisterVehicles)
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnListVehicles)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(btnManageServices)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegisterVehicles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSearchVehicles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListVehicles)
-                .addContainerGap(402, Short.MAX_VALUE))
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
         );
-
-        SplitPane.setLeftComponent(controlPanel);
-
-        workArea.setBackground(new java.awt.Color(153, 204, 255));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        SplitPane.setRightComponent(workArea);
-
-        getContentPane().add(SplitPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegisterVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterVehiclesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegisterVehiclesActionPerformed
-
-    private void btnManageServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageServicesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageServicesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,13 +78,5 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSplitPane SplitPane;
-    private javax.swing.JButton btnListVehicles;
-    private javax.swing.JButton btnManageServices;
-    private javax.swing.JButton btnRegisterVehicles;
-    private javax.swing.JButton btnSearchVehicles;
-    private javax.swing.JPanel controlPanel;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }
