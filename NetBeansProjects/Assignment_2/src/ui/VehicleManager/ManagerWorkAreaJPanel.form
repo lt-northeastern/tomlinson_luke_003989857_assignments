@@ -46,16 +46,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Services"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageServicesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegisterVehicle">
       <Properties>
         <Property name="text" type="java.lang.String" value="Register Vehicle"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisterVehicleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnManageVehicles">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Vehicles"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageVehiclesActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

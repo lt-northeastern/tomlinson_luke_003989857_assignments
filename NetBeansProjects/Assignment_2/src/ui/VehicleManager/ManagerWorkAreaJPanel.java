@@ -4,17 +4,29 @@
  */
 package ui.VehicleManager;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import model.ServiceCatalog;
+import model.VehicleDirectory;
 /**
  *
  * @author luke
  */
 public class ManagerWorkAreaJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    VehicleDirectory vehicleDirectory;
+    ServiceCatalog serviceCatalog;
+
     /**
-     * Creates new form ManagerWorkAreaJPanel
+     * Creates new form AccountMngWorkAreaJPanel
      */
-    public ManagerWorkAreaJPanel() {
+    public ManagerWorkAreaJPanel(JPanel container, VehicleDirectory directory, ServiceCatalog catalog) {
         initComponents();
+
+        userProcessContainer = container;
+        vehicleDirectory = directory;
+        serviceCatalog = catalog;
     }
 
     /**
@@ -31,10 +43,25 @@ public class ManagerWorkAreaJPanel extends javax.swing.JPanel {
         btnManageVehicles = new javax.swing.JButton();
 
         btnManageServices.setText("Manage Services");
+        btnManageServices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageServicesActionPerformed(evt);
+            }
+        });
 
         btnRegisterVehicle.setText("Register Vehicle");
+        btnRegisterVehicle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterVehicleActionPerformed(evt);
+            }
+        });
 
         btnManageVehicles.setText("Manage Vehicles");
+        btnManageVehicles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageVehiclesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,6 +87,33 @@ public class ManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(615, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnManageServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageServicesActionPerformed
+        // TODO add your handling code here:
+        ManageServicesJPanel panel = new ManageServicesJPanel(userProcessContainer, serviceCatalog);
+        userProcessContainer.add("ManageServicesJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageServicesActionPerformed
+
+    private void btnRegisterVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterVehicleActionPerformed
+        // TODO add your handling code here:
+        RegisterVehicleJPanel panel = new RegisterVehicleJPanel(userProcessContainer, vehicleDirectory, serviceCatalog);
+        userProcessContainer.add("RegisterVehicleJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnRegisterVehicleActionPerformed
+
+    private void btnManageVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVehiclesActionPerformed
+        // TODO add your handling code here:
+        ManageVehiclesJPanel panel = new ManageVehiclesJPanel(userProcessContainer, vehicleDirectory, serviceCatalog);
+        userProcessContainer.add("ManageVehiclesJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageVehiclesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
