@@ -4,18 +4,35 @@
  */
 package ui;
 
+import model.Owner;
+import model.Service;
+import model.ServiceCatalog;
+import model.Vehicle;
+import model.VehicleDirectory;
+import java.awt.CardLayout;
+import ui.VehicleManager.ManagerWorkAreaJPanel;
+
 /**
  *
  * @author luke
  */
 public class MainJFrame extends javax.swing.JFrame {
+    
+    private VehicleDirectory vehicleDirectory;
+    private ServiceCatalog serviceCatalog;
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
-    }
+        
+        this.vehicleDirectory = new VehicleDirectory();
+        this.serviceCatalog = new ServiceCatalog();
+        generateDemoData();
+}
+        
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,9 +44,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
+        topJPanel = new javax.swing.JPanel();
         btnOpenWorkArea = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,37 +59,37 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout topJPanelLayout = new javax.swing.GroupLayout(topJPanel);
+        topJPanel.setLayout(topJPanelLayout);
+        topJPanelLayout.setHorizontalGroup(
+            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topJPanelLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(btnOpenWorkArea)
                 .addContainerGap(413, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        topJPanelLayout.setVerticalGroup(
+            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topJPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnOpenWorkArea)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setTopComponent(jPanel1);
+        jSplitPane1.setTopComponent(topJPanel);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout userProcessContainerLayout = new javax.swing.GroupLayout(userProcessContainer);
+        userProcessContainer.setLayout(userProcessContainerLayout);
+        userProcessContainerLayout.setHorizontalGroup(
+            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 655, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        userProcessContainerLayout.setVerticalGroup(
+            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 348, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setRightComponent(jPanel2);
+        jSplitPane1.setRightComponent(userProcessContainer);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
@@ -81,6 +98,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnOpenWorkAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenWorkAreaActionPerformed
         // TODO add your handling code here:
+        ManagerWorkAreaJPanel panel = new ManagerWorkAreaJPanel(userProcessContainer, vehicleDirectory, serviceCatalog);
+        userProcessContainer.add("ManagerWorkAreaJPanel", panel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnOpenWorkAreaActionPerformed
 
     /**
@@ -120,8 +142,105 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpenWorkArea;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel topJPanel;
+    private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+private void generateDemoData() {
+     Service newService1 = serviceCatalog.addNewService();
+        newService1.setServiceID(1);
+        newService1.setServiceType("Oil Change");
+        newService1.setCost(49.99);
+        newService1.setMechanicName("Mike Ross");
+        newService1.setServiceDuration(0.5f);
+
+        Service newService2 = serviceCatalog.addNewService();
+        newService2.setServiceID(2);
+        newService2.setServiceType("Car Wash");
+        newService2.setCost(15.00);
+        newService2.setMechanicName("Ana Diaz");
+        newService2.setServiceDuration(0.75f);
+
+        Service newService3 = serviceCatalog.addNewService();
+        newService3.setServiceID(3);
+        newService3.setServiceType("Brake Inspection");
+        newService3.setCost(89.50);
+        newService3.setMechanicName("Raj Patel");
+        newService3.setServiceDuration(1.5f);
+
+        Owner newOwner1 = new Owner();
+        newOwner1.setOwnerID(101);
+        newOwner1.setFirstName("John");
+        newOwner1.setLastName("Smith");
+        newOwner1.setServiceDate("2026-09-28");
+
+        Vehicle newVehicle1 = vehicleDirectory.addNewVehicle();
+        newVehicle1.setVehicleId(201);
+        newVehicle1.setMake("Toyota");
+        newVehicle1.setModel("Camry");
+        newVehicle1.setYear((short) 2021);
+        newVehicle1.setRegistrationNumber("RI-4821");
+        newVehicle1.setOwner(newOwner1);
+        newVehicle1.setServiceOpted(newService1);
+
+        Owner newOwner2 = new Owner();
+        newOwner2.setOwnerID(102);
+        newOwner2.setFirstName("Priya");
+        newOwner2.setLastName("Nair");
+        newOwner2.setServiceDate("2026-09-29");
+
+        Vehicle newVehicle2 = vehicleDirectory.addNewVehicle();
+        newVehicle2.setVehicleId(202);
+        newVehicle2.setMake("Toyota");
+        newVehicle2.setModel("Camry");
+        newVehicle2.setYear((short) 2019);
+        newVehicle2.setRegistrationNumber("RI-7734");
+        newVehicle2.setOwner(newOwner2);
+        newVehicle2.setServiceOpted(newService2);
+
+        Owner newOwner3 = new Owner();
+        newOwner3.setOwnerID(103);
+        newOwner3.setFirstName("Leo");
+        newOwner3.setLastName("Kim");
+        newOwner3.setServiceDate("2026-09-30");
+
+        Vehicle newVehicle3 = vehicleDirectory.addNewVehicle();
+        newVehicle3.setVehicleId(203);
+        newVehicle3.setMake("Honda");
+        newVehicle3.setModel("Civic");
+        newVehicle3.setYear((short) 2022);
+        newVehicle3.setRegistrationNumber("RI-1190");
+        newVehicle3.setOwner(newOwner3);
+        newVehicle3.setServiceOpted(newService3);
+
+        Owner newOwner4 = new Owner();
+        newOwner4.setOwnerID(104);
+        newOwner4.setFirstName("Sara");
+        newOwner4.setLastName("Lopez");
+        newOwner4.setServiceDate("2026-10-01");
+
+        Vehicle newVehicle4 = vehicleDirectory.addNewVehicle();
+        newVehicle4.setVehicleId(204);
+        newVehicle4.setMake("Ford");
+        newVehicle4.setModel("Escape");
+        newVehicle4.setYear((short) 2020);
+        newVehicle4.setRegistrationNumber("RI-5562");
+        newVehicle4.setOwner(newOwner4);
+        newVehicle4.setServiceOpted(newService1);
+
+        Owner newOwner5 = new Owner();
+        newOwner5.setOwnerID(105);
+        newOwner5.setFirstName("Tom");
+        newOwner5.setLastName("Reed");
+        newOwner5.setServiceDate("2026-10-02");
+
+        Vehicle newVehicle5 = vehicleDirectory.addNewVehicle();
+        newVehicle5.setVehicleId(205);
+        newVehicle5.setMake("Honda");
+        newVehicle5.setModel("Accord");
+        newVehicle5.setYear((short) 2018);
+        newVehicle5.setRegistrationNumber("RI-3307");
+        newVehicle5.setOwner(newOwner5);
+        newVehicle5.setServiceOpted(newService2);
+    }
 }
