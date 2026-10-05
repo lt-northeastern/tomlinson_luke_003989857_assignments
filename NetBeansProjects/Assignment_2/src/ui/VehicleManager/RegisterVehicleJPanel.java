@@ -50,6 +50,7 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -93,7 +94,7 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
                 btnRegisterActionPerformed(evt);
             }
         });
-        add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 553, -1, -1));
+        add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 830, -1, -1));
         add(txtOwnerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 89, 210, -1));
         add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 124, 210, -1));
         add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 165, 210, -1));
@@ -120,6 +121,14 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 210, -1));
+
+        btnBack.setText("<<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -130,8 +139,13 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtServiceDateActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
