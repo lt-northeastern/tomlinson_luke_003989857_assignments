@@ -26,66 +26,152 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        btnManagerWorkArea = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        lblServiceDate = new javax.swing.JLabel();
+        lblOwnerID = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtOwnerID = new javax.swing.JTextField();
+        txtFirstName = new javax.swing.JTextField();
+        txtLastName = new javax.swing.JTextField();
+        txtServiceDate = new javax.swing.JTextField();
+        txtVehicleID = new javax.swing.JTextField();
+        txtMake = new javax.swing.JTextField();
+        txtModel = new javax.swing.JTextField();
+        txtYear = new javax.swing.JTextField();
+        txtMechanic = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblMechanic = new javax.swing.JLabel();
+        lblDuration = new javax.swing.JLabel();
+        txtDuration = new javax.swing.JTextField();
+        txtRegistrationNo2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        lblServiceDate.setText("Service Date");
+        add(lblServiceDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 202, -1, -1));
 
-        btnManagerWorkArea.setText("Open Manager Work Area");
-        btnManagerWorkArea.addActionListener(new java.awt.event.ActionListener() {
+        lblOwnerID.setText("Owner ID");
+        add(lblOwnerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 92, -1, -1));
+
+        lblLastName.setText("Last Name");
+        add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 168, -1, -1));
+
+        lblFirstName.setText("FIrst Name");
+        add(lblFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 127, -1, -1));
+
+        jLabel5.setText("Make");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        jLabel6.setText("Vehicle ID");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
+
+        jLabel7.setText("Model");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
+
+        jLabel8.setText("Year");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
+
+        jLabel9.setText("Registration No.");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+
+        jLabel10.setText("Service Opted");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel12.setText("View Vehicles");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
+        add(txtOwnerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 89, 210, -1));
+        add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 124, 210, -1));
+        add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 165, 210, -1));
+
+        txtServiceDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManagerWorkAreaActionPerformed(evt);
+                txtServiceDateActionPerformed(evt);
             }
         });
+        add(txtServiceDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 199, 210, -1));
+        add(txtVehicleID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 210, -1));
+        add(txtMake, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 210, -1));
+        add(txtModel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 210, -1));
+        add(txtYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 210, -1));
+        add(txtMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 210, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(btnManagerWorkArea)
-                .addContainerGap(551, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnManagerWorkArea)
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
+        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel13.setText("Owner");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, -1, -1));
 
-        jSplitPane1.setTopComponent(jPanel1);
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel14.setText("Vehicle");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
-        );
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 210, -1));
 
-        jSplitPane1.setRightComponent(jPanel2);
+        lblMechanic.setText("Mechanic");
+        add(lblMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, -1));
 
-        add(jSplitPane1, java.awt.BorderLayout.CENTER);
+        lblDuration.setText("Duration ");
+        add(lblDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
+        add(txtDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 210, -1));
+        add(txtRegistrationNo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 210, -1));
+
+        jButton1.setText("Save");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, -1));
+
+        jButton2.setText("Update");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, -1, -1));
+
+        btnBack.setText("<<< Back");
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManagerWorkAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerWorkAreaActionPerformed
+    private void txtServiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnManagerWorkAreaActionPerformed
+    }//GEN-LAST:event_txtServiceDateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManagerWorkArea;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblDuration;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblMechanic;
+    private javax.swing.JLabel lblOwnerID;
+    private javax.swing.JLabel lblServiceDate;
+    private javax.swing.JTextField txtDuration;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtMake;
+    private javax.swing.JTextField txtMechanic;
+    private javax.swing.JTextField txtModel;
+    private javax.swing.JTextField txtOwnerID;
+    private javax.swing.JTextField txtRegistrationNo2;
+    private javax.swing.JTextField txtServiceDate;
+    private javax.swing.JTextField txtVehicleID;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
 }
