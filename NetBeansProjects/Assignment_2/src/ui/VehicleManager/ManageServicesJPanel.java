@@ -60,32 +60,32 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
         add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 209, -1));
 
         lblServiceID.setText("Service ID");
-        add(lblServiceID, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 320, 85, -1));
+        add(lblServiceID, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 85, -1));
 
         lblServiceType.setText("Service Type");
-        add(lblServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 355, 85, -1));
+        add(lblServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 85, -1));
 
         lblCost.setText("Cost");
-        add(lblCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 390, 85, -1));
+        add(lblCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 85, -1));
 
         lblMechanic.setText("Mechanic");
-        add(lblMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 431, 85, -1));
-        add(txtServiceID, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 317, 191, -1));
-        add(txtServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 352, 191, -1));
-        add(txtCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 387, 191, -1));
+        add(lblMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 85, -1));
+        add(txtServiceID, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 191, -1));
+        add(txtServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 191, -1));
+        add(txtCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 191, -1));
 
         txtMechanic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMechanicActionPerformed(evt);
             }
         });
-        add(txtMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 428, 191, -1));
+        add(txtMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 191, -1));
 
         btnAdd.setText("Add");
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 542, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, -1, -1));
 
         btnUpdate.setText("Update");
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 542, -1, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, -1, -1));
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +93,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 542, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
 
         tblManageServices.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,8 +120,8 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 670, 170));
 
         lblDuration.setText("Duration");
-        add(lblDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, -1, -1));
-        add(txtDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 190, -1));
+        add(lblDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, -1, -1));
+        add(txtDuration, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 190, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
