@@ -4,6 +4,8 @@
  */
 package ui.VehicleManager;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author luke
@@ -134,12 +136,22 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, -1, -1));
 
         btnBack.setText("<<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtServiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtServiceDateActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

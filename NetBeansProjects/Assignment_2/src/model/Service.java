@@ -56,4 +56,9 @@ public class Service {
         this.serviceDuration = serviceDuration;
     }
     
+    @Override
+    public String toString() {
+        return serviceType;
+    }
+    
 }

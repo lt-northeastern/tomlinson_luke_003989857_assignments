@@ -4,17 +4,47 @@
  */
 package ui.VehicleManager;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Service;
+import model.ServiceCatalog;
+
 /**
  *
  * @author luke
  */
 public class ManageServicesJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    ServiceCatalog serviceCatalog;
+
     /**
      * Creates new form ManageServicesJPanel
      */
-    public ManageServicesJPanel() {
+    public ManageServicesJPanel(JPanel container, ServiceCatalog catalog) {
         initComponents();
+
+        userProcessContainer = container;
+        serviceCatalog = catalog;
+
+        populateTable();
+    }
+
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblManageServices.getModel();
+        model.setRowCount(0);
+
+        for (Service s : serviceCatalog.getServices()) {
+            Object[] row = new Object[5];
+            row[0] = s;
+            row[1] = s.getServiceID();
+            row[2] = s.getCost();
+            row[3] = s.getMechanicName();
+            row[4] = s.getServiceDuration();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -82,9 +112,19 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
         add(txtMechanic, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 191, -1));
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, -1, -1));
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, -1, -1));
 
         btnDelete.setText("Delete");
@@ -115,6 +155,11 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblManageServices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblManageServicesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblManageServices);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 670, 170));
@@ -126,6 +171,9 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtMechanicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMechanicActionPerformed
@@ -134,7 +182,108 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblManageServices.getSelectedRow();
+
+        if (selectedRow >= 0) {
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected service?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                Service selectedService = (Service) tblManageServices.getValueAt(selectedRow, 0);
+                serviceCatalog.removeService(selectedService);
+                populateTable();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a service from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        int serviceID;
+        double cost;
+        float duration;
+
+        String serviceType = txtServiceType.getText();
+        String mechanicName = txtMechanic.getText();
+
+        if (txtServiceID.getText().isBlank() || serviceType.isBlank() || txtCost.getText().isBlank()
+                || mechanicName.isBlank() || txtDuration.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            serviceID = Integer.parseInt(txtServiceID.getText());
+            cost = Double.parseDouble(txtCost.getText());
+            duration = Float.parseFloat(txtDuration.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please check the Service ID, Cost and Duration inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Service s = serviceCatalog.addNewService();
+
+        s.setServiceID(serviceID);
+        s.setServiceType(serviceType);
+        s.setCost(cost);
+        s.setMechanicName(mechanicName);
+        s.setServiceDuration(duration);
+
+        JOptionPane.showMessageDialog(this, "Service successfully added.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        populateTable();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void tblManageServicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblManageServicesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblManageServicesMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblManageServices.getSelectedRow();
+
+        if (selectedRow >= 0) {
+
+            int serviceID;
+            double cost;
+            float duration;
+
+            String serviceType = txtServiceType.getText();
+            String mechanicName = txtMechanic.getText();
+
+            if (txtServiceID.getText().isBlank() || serviceType.isBlank() || txtCost.getText().isBlank()
+                    || mechanicName.isBlank() || txtDuration.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                serviceID = Integer.parseInt(txtServiceID.getText());
+                cost = Double.parseDouble(txtCost.getText());
+                duration = Float.parseFloat(txtDuration.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Please check the Service ID, Cost and Duration inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Service selectedService = (Service) tblManageServices.getValueAt(selectedRow, 0);
+
+            selectedService.setServiceID(serviceID);
+            selectedService.setServiceType(serviceType);
+            selectedService.setCost(cost);
+            selectedService.setMechanicName(mechanicName);
+            selectedService.setServiceDuration(duration);
+
+            JOptionPane.showMessageDialog(this, "Service successfully updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+            populateTable();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a service from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,4 +305,5 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtServiceID;
     private javax.swing.JTextField txtServiceType;
     // End of variables declaration//GEN-END:variables
+
 }
