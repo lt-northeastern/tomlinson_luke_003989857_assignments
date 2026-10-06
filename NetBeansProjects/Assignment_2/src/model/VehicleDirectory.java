@@ -30,6 +30,28 @@ public class VehicleDirectory {
     
     public ArrayList<Vehicle> getVehicles(){
         return vehicles;
+        
+    }
+     public Vehicle searchById(int vehicleId) {
+        for (Vehicle v : vehicles) {
+            if (v.getVehicleId() == vehicleId) {
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Vehicle> searchByName(String name) {
+        ArrayList<Vehicle> results = new ArrayList<>();
+        for (Vehicle v : vehicles) {
+            if (v.getModel().equals(name)) {
+                results.add(v);
+            }
+        }
+        return results;
     }
 
 }
+    
+
+

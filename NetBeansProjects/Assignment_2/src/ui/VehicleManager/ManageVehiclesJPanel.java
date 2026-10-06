@@ -10,6 +10,8 @@ import model.VehicleDirectory;
 import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
 import model.Vehicle;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -102,14 +104,39 @@ public class ManageVehiclesJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         btnSearchID.setText("Search by ID");
+        btnSearchID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchIDActionPerformed(evt);
+            }
+        });
 
         btnSearchName.setText("Search by Name");
+        btnSearchName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchNameActionPerformed(evt);
+            }
+        });
 
         btnViewDetails.setText("View Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
 
         btnDeleteVehicles.setText("Delete Vehicle");
+        btnDeleteVehicles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteVehiclesActionPerformed(evt);
+            }
+        });
 
         btnShowAll.setText("Show All");
+        btnShowAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -173,6 +200,109 @@ public class ManageVehiclesJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchIDActionPerformed
+        // TODO add your handling code here:
+        if (!txtSearchID.getText().isBlank()) {
+
+            int vehicleId;
+
+            try {
+                vehicleId = Integer.parseInt(txtSearchID.getText().trim());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Vehicle ID must be a number.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Vehicle foundVehicle = vehicleDirectory.searchById(vehicleId);
+
+            if (foundVehicle != null) {
+
+                ViewVehicleJPanel panel = new ViewVehicleJPanel(userProcessContainer, vehicleDirectory, serviceCatalog, foundVehicle);
+                userProcessContainer.add("ViewVehicleJPanel", panel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Vehicle not found. Please check the vehicle ID and try again.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please type the vehicle ID to search.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchIDActionPerformed
+
+    private void btnSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNameActionPerformed
+        // TODO add your handling code here:
+        
+        if (!txtSearchName.getText().isBlank()) {
+
+            ArrayList<Vehicle> results = vehicleDirectory.searchByName(txtSearchName.getText().trim());
+
+            if (!results.isEmpty()) {
+
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+
+                for (Vehicle v : results) {
+                    Object[] row = new Object[4];
+                    row[0] = v;
+                    row[1] = v.getOwner().getOwnerID();
+                    row[2] = v.getServiceOpted().getServiceType();
+                    row[3] = v.getServiceOpted().getCost();
+                    model.addRow(row);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No vehicles found with that name.", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please type a vehicle name to search.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSearchNameActionPerformed
+
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow >= 0) {
+
+            Vehicle selectedVehicle = (Vehicle) jTable1.getValueAt(selectedRow, 0);
+
+            ViewVehicleJPanel panel = new ViewVehicleJPanel(userProcessContainer, vehicleDirectory, serviceCatalog, selectedVehicle);
+            userProcessContainer.add("ViewVehicleJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a vehicle from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
+
+    private void btnDeleteVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteVehiclesActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow >= 0) {
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected vehicle and owner record?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                Vehicle selectedVehicle = (Vehicle) jTable1.getValueAt(selectedRow, 0);
+                vehicleDirectory.removeVehicle(selectedVehicle);
+                populateTable();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a vehicle from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteVehiclesActionPerformed
+
+    private void btnShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAllActionPerformed
+           txtSearchID.setText("");
+        txtSearchName.setText("");
+        populateTable();
+    }//GEN-LAST:event_btnShowAllActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

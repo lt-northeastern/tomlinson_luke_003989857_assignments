@@ -5,18 +5,39 @@
 package ui.VehicleManager;
 
 import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Service;
+import model.ServiceCatalog;
+import model.Vehicle;
+import model.VehicleDirectory;
 
 /**
  *
  * @author luke
  */
 public class ViewVehicleJPanel extends javax.swing.JPanel {
+    
+    private JPanel userProcessContainer;
+    private VehicleDirectory vehicleDirectory;
+    private ServiceCatalog serviceCatalog;
+    private Vehicle vehicle;
+
 
     /**
      * Creates new form ViewVehicleJPanel
      */
-    public ViewVehicleJPanel() {
+    public ViewVehicleJPanel(JPanel userProcessContainer, VehicleDirectory directory, ServiceCatalog catalog, Vehicle vehicle) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.serviceCatalog = catalog;
+        this.vehicle = vehicle;
+
+        populateServiceComboBox();
+        refreshTextFields();
+        setViewMode();
+    
     }
 
     /**
@@ -56,7 +77,7 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
         txtDuration = new javax.swing.JTextField();
         txtRegistrationNo2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,7 +139,11 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
         jLabel14.setText("Vehicle");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 210, -1));
 
         lblMechanic.setText("Mechanic");
@@ -130,10 +155,20 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
         add(txtRegistrationNo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 210, -1));
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, -1));
 
-        jButton2.setText("Update");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, -1, -1));
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 610, -1, -1));
 
         btnBack.setText("<<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -150,15 +185,86 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-       
+        userProcessContainer.remove(this);
+        Component[] panelStack = userProcessContainer.getComponents();
+        JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
+        ManageVehiclesJPanel manageVehiclesJPanel = (ManageVehiclesJPanel) lastPanel;
+        manageVehiclesJPanel.populateTable();
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+
+
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+         setEditMode();
+        
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int ownerID;
+        int vehicleID;
+        short year;
+
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String serviceDate = txtServiceDate.getText();
+        String make = txtMake.getText();
+        String model = txtModel.getText();
+        String registrationNo = txtRegistrationNo2.getText();
+        Service selectedService = (Service) jComboBox1.getSelectedItem();
+
+        if (txtOwnerID.getText().isBlank() || firstName.isBlank() || lastName.isBlank() || serviceDate.isBlank()
+                || txtVehicleID.getText().isBlank() || make.isBlank() || model.isBlank()
+                || txtYear.getText().isBlank() || registrationNo.isBlank() || selectedService == null)
+        {
+            JOptionPane.showMessageDialog(null, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            ownerID = Integer.parseInt(txtOwnerID.getText().trim());
+            vehicleID = Integer.parseInt(txtVehicleID.getText().trim());
+            year = Short.parseShort(txtYear.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please check the Owner ID, Vehicle ID and Year inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        vehicle.getOwner().setOwnerID(ownerID);
+        vehicle.getOwner().setFirstName(firstName);
+        vehicle.getOwner().setLastName(lastName);
+        vehicle.getOwner().setServiceDate(serviceDate);
+
+        vehicle.setVehicleId(vehicleID);
+        vehicle.setMake(make);
+        vehicle.setModel(model);
+        vehicle.setYear(year);
+        vehicle.setRegistrationNumber(registrationNo);
+        vehicle.setServiceOpted(selectedService);
+
+        JOptionPane.showMessageDialog(null, "Vehicle successfully updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        refreshTextFields();
+        setViewMode();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Service> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -186,4 +292,59 @@ public class ViewVehicleJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtVehicleID;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
+ private void populateServiceComboBox() {
+        jComboBox1.removeAllItems();
+        for (Service s : serviceCatalog.getServices()) {
+            jComboBox1.addItem(s);
+        }
+    }
+
+    private void refreshTextFields() {
+        txtOwnerID.setText(String.valueOf(vehicle.getOwner().getOwnerID()));
+        txtFirstName.setText(vehicle.getOwner().getFirstName());
+        txtLastName.setText(vehicle.getOwner().getLastName());
+        txtServiceDate.setText(vehicle.getOwner().getServiceDate());
+        txtVehicleID.setText(String.valueOf(vehicle.getVehicleId()));
+        txtMake.setText(vehicle.getMake());
+        txtModel.setText(vehicle.getModel());
+        txtYear.setText(String.valueOf(vehicle.getYear()));
+        txtRegistrationNo2.setText(vehicle.getRegistrationNumber());
+        jComboBox1.setSelectedItem(vehicle.getServiceOpted());
+        txtMechanic.setText(vehicle.getServiceOpted().getMechanicName());
+        txtDuration.setText(String.valueOf(vehicle.getServiceOpted().getServiceDuration()));
+    }
+
+    private void setViewMode() {
+        txtOwnerID.setEnabled(false);
+        txtFirstName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtServiceDate.setEnabled(false);
+        txtVehicleID.setEnabled(false);
+        txtMake.setEnabled(false);
+        txtModel.setEnabled(false);
+        txtYear.setEnabled(false);
+        txtRegistrationNo2.setEnabled(false);
+        jComboBox1.setEnabled(false);
+        txtMechanic.setEnabled(false);
+        txtDuration.setEnabled(false);
+        jButton1.setEnabled(false);
+        btnUpdate.setEnabled(true);
+    }
+
+    private void setEditMode() {
+        txtOwnerID.setEnabled(true);
+        txtFirstName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtServiceDate.setEnabled(true);
+        txtVehicleID.setEnabled(true);
+        txtMake.setEnabled(true);
+        txtModel.setEnabled(true);
+        txtYear.setEnabled(true);
+        txtRegistrationNo2.setEnabled(true);
+        jComboBox1.setEnabled(true);
+        txtMechanic.setEnabled(false);
+        txtDuration.setEnabled(false);
+        jButton1.setEnabled(true);
+        btnUpdate.setEnabled(false);
+    }
 }
