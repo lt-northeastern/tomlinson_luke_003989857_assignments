@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import model.ServiceCatalog;
 import model.VehicleDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import model.Owner;
+import model.Service;
+import model.Vehicle;
 
 /**
  *
@@ -28,7 +32,17 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         userProcessContainer = container;
         vehicleDirectory = directory;
         serviceCatalog = catalog;
+        
+        populateServiceComboBox();
     }
+    
+    private void populateServiceComboBox() {
+    jComboBox1.removeAllItems();
+
+    for (Service s : serviceCatalog.getServices()) {
+        jComboBox1.addItem(s);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +64,6 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
         txtOwnerID = new javax.swing.JTextField();
         txtFirstName = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
@@ -64,6 +77,7 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -76,7 +90,7 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         lblLastName.setText("Last Name");
         add(lblLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 168, -1, -1));
 
-        lblFirstName.setText("FIrst Name");
+        lblFirstName.setText("First Name");
         add(lblFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 127, -1, -1));
 
         jLabel5.setText("Make");
@@ -100,14 +114,6 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel12.setText("Register Vehicles");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
-
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-        add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 830, -1, -1));
         add(txtOwnerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 89, 210, -1));
         add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 124, 210, -1));
         add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 165, 210, -1));
@@ -132,7 +138,6 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         jLabel14.setText("Vehicle");
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 210, -1));
 
         btnBack.setText("<<< Back");
@@ -142,11 +147,15 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegisterActionPerformed
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, -1, -1));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void txtServiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceDateActionPerformed
         // TODO add your handling code here:
@@ -159,11 +168,69 @@ public class RegisterVehicleJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        int ownerID;
+        int vehicleID;
+        short year;
+
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String serviceDate = txtServiceDate.getText();
+        String make = txtMake.getText();
+        String model = txtModel.getText();
+        String registrationNo = txtRegistrationNo.getText();
+        Service selectedService = (Service) jComboBox1.getSelectedItem();
+
+        if (txtOwnerID.getText().isBlank() || firstName.isBlank() || lastName.isBlank() || serviceDate.isBlank()
+                || txtVehicleID.getText().isBlank() || make.isBlank() || model.isBlank()
+                || txtYear.getText().isBlank() || registrationNo.isBlank() || selectedService == null) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            ownerID = Integer.parseInt(txtOwnerID.getText());
+            vehicleID = Integer.parseInt(txtVehicleID.getText());
+            year = Short.parseShort(txtYear.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please check the Owner ID, Vehicle ID and Year inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Owner o = new Owner();
+        o.setOwnerID(ownerID);
+        o.setFirstName(firstName);
+        o.setLastName(lastName);
+        o.setServiceDate(serviceDate);
+
+        Vehicle v = vehicleDirectory.addNewVehicle();
+        v.setVehicleId(vehicleID);
+        v.setMake(make);
+        v.setModel(model);
+        v.setYear(year);
+        v.setRegistrationNumber(registrationNo);
+        v.setOwner(o);
+        v.setServiceOpted(selectedService);
+
+        JOptionPane.showMessageDialog(this, "Vehicle successfully registered.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        txtOwnerID.setText("");
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtServiceDate.setText("");
+        txtVehicleID.setText("");
+        txtMake.setText("");
+        txtModel.setText("");
+        txtYear.setText("");
+        txtRegistrationNo.setText("");
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Service> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

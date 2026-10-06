@@ -73,5 +73,10 @@ public class Vehicle {
     public void setServiceOpted(Service serviceOpted) {
         this.serviceOpted = serviceOpted;
     }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(vehicleId);
+    }
 
 }

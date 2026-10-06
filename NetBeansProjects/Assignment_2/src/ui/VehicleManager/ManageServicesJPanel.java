@@ -19,6 +19,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     ServiceCatalog serviceCatalog;
+    Service selectedService;
 
     /**
      * Creates new form ManageServicesJPanel
@@ -93,7 +94,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
         add(lblServiceID, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 85, -1));
 
         lblServiceType.setText("Service Type");
-        add(lblServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 85, -1));
+        add(lblServiceType, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 85, -1));
 
         lblCost.setText("Cost");
         add(lblCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 85, -1));
@@ -117,7 +118,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, -1, -1));
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +126,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, -1, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +134,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, -1, -1));
 
         tblManageServices.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,7 +145,7 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Service ID", "Service Type", "Cost", "Mechanic", "Duration"
+                "Service Type", "Service ID", "Cost", "Mechanic", "Duration"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -242,47 +243,47 @@ public class ManageServicesJPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblManageServices.getSelectedRow();
+    int selectedRow = tblManageServices.getSelectedRow();
 
-        if (selectedRow >= 0) {
+if (selectedRow >= 0) {
 
-            int serviceID;
-            double cost;
-            float duration;
+    int serviceID;
+    double cost;
+    float duration;
 
-            String serviceType = txtServiceType.getText();
-            String mechanicName = txtMechanic.getText();
+    String serviceType = txtServiceType.getText();
+    String mechanicName = txtMechanic.getText();
 
-            if (txtServiceID.getText().isBlank() || serviceType.isBlank() || txtCost.getText().isBlank()
-                    || mechanicName.isBlank() || txtDuration.getText().isBlank()) {
-                JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+    if (txtServiceID.getText().isBlank() || serviceType.isBlank() || txtCost.getText().isBlank()
+            || mechanicName.isBlank() || txtDuration.getText().isBlank()) {
+        JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-            try {
-                serviceID = Integer.parseInt(txtServiceID.getText());
-                cost = Double.parseDouble(txtCost.getText());
-                duration = Float.parseFloat(txtDuration.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Please check the Service ID, Cost and Duration inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+    try {
+        serviceID = Integer.parseInt(txtServiceID.getText());
+        cost = Double.parseDouble(txtCost.getText());
+        duration = Float.parseFloat(txtDuration.getText());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Please check the Service ID, Cost and Duration inputs.", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-            Service selectedService = (Service) tblManageServices.getValueAt(selectedRow, 0);
+    Service selectedService = (Service) tblManageServices.getValueAt(selectedRow, 0);
 
-            selectedService.setServiceID(serviceID);
-            selectedService.setServiceType(serviceType);
-            selectedService.setCost(cost);
-            selectedService.setMechanicName(mechanicName);
-            selectedService.setServiceDuration(duration);
+    selectedService.setServiceID(serviceID);
+    selectedService.setServiceType(serviceType);
+    selectedService.setCost(cost);
+    selectedService.setMechanicName(mechanicName);
+    selectedService.setServiceDuration(duration);
 
-            JOptionPane.showMessageDialog(this, "Service successfully updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this, "Service successfully updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
-            populateTable();
+    populateTable();
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select a service from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
+} else {
+    JOptionPane.showMessageDialog(null, "Please select a service from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+}
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 

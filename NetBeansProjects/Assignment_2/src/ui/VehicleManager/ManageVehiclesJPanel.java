@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import model.ServiceCatalog;
 import model.VehicleDirectory;
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
+import model.Vehicle;
+
 
 /**
  *
@@ -26,9 +29,24 @@ public class ManageVehiclesJPanel extends javax.swing.JPanel {
         initComponents();
         
         
-     userProcessContainer = container;
+    userProcessContainer = container;
     vehicleDirectory = directory;
     serviceCatalog = catalog; 
+    
+    populateTable();}
+    
+    public void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+
+    for (Vehicle v : vehicleDirectory.getVehicles()) {
+        Object[] row = new Object[4];
+        row[0] = v;
+        row[1] = v.getOwner().getOwnerID();
+        row[2] = v.getServiceOpted().getServiceType();
+        row[3] = v.getServiceOpted().getCost();
+        model.addRow(row);
+    }
     }
 
     /**
@@ -70,7 +88,7 @@ public class ManageVehiclesJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Owner ID", "Vehicle ID", "Service", "Cost"
+                "Vehicle ID", "Owner ID", "Service", "Cost"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -44,7 +44,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        topJPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         btnOpenWorkArea = new javax.swing.JButton();
         userProcessContainer = new javax.swing.JPanel();
 
@@ -59,36 +59,26 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout topJPanelLayout = new javax.swing.GroupLayout(topJPanel);
-        topJPanel.setLayout(topJPanelLayout);
-        topJPanelLayout.setHorizontalGroup(
-            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topJPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(btnOpenWorkArea)
                 .addContainerGap(413, Short.MAX_VALUE))
         );
-        topJPanelLayout.setVerticalGroup(
-            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topJPanelLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnOpenWorkArea)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setTopComponent(topJPanel);
+        jSplitPane1.setTopComponent(jPanel1);
 
-        javax.swing.GroupLayout userProcessContainerLayout = new javax.swing.GroupLayout(userProcessContainer);
-        userProcessContainer.setLayout(userProcessContainerLayout);
-        userProcessContainerLayout.setHorizontalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
-        );
-        userProcessContainerLayout.setVerticalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
-        );
-
+        userProcessContainer.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(userProcessContainer);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
@@ -142,8 +132,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpenWorkArea;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel topJPanel;
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 private void generateDemoData() {
@@ -151,27 +141,27 @@ private void generateDemoData() {
         newService1.setServiceID(1);
         newService1.setServiceType("Oil Change");
         newService1.setCost(49.99);
-        newService1.setMechanicName("Mike Ross");
+        newService1.setMechanicName("Luke Tomlinson");
         newService1.setServiceDuration(0.5f);
 
         Service newService2 = serviceCatalog.addNewService();
         newService2.setServiceID(2);
         newService2.setServiceType("Car Wash");
         newService2.setCost(15.00);
-        newService2.setMechanicName("Ana Diaz");
+        newService2.setMechanicName("Chris Strout");
         newService2.setServiceDuration(0.75f);
 
         Service newService3 = serviceCatalog.addNewService();
         newService3.setServiceID(3);
         newService3.setServiceType("Brake Inspection");
         newService3.setCost(89.50);
-        newService3.setMechanicName("Raj Patel");
+        newService3.setMechanicName("Zach Rahilly");
         newService3.setServiceDuration(1.5f);
 
         Owner newOwner1 = new Owner();
         newOwner1.setOwnerID(101);
-        newOwner1.setFirstName("John");
-        newOwner1.setLastName("Smith");
+        newOwner1.setFirstName("Tom");
+        newOwner1.setLastName("Brady");
         newOwner1.setServiceDate("2026-09-28");
 
         Vehicle newVehicle1 = vehicleDirectory.addNewVehicle();
@@ -185,8 +175,8 @@ private void generateDemoData() {
 
         Owner newOwner2 = new Owner();
         newOwner2.setOwnerID(102);
-        newOwner2.setFirstName("Priya");
-        newOwner2.setLastName("Nair");
+        newOwner2.setFirstName("Lebron");
+        newOwner2.setLastName("James");
         newOwner2.setServiceDate("2026-09-29");
 
         Vehicle newVehicle2 = vehicleDirectory.addNewVehicle();
@@ -200,8 +190,8 @@ private void generateDemoData() {
 
         Owner newOwner3 = new Owner();
         newOwner3.setOwnerID(103);
-        newOwner3.setFirstName("Leo");
-        newOwner3.setLastName("Kim");
+        newOwner3.setFirstName("Ryan");
+        newOwner3.setLastName("Seacrest");
         newOwner3.setServiceDate("2026-09-30");
 
         Vehicle newVehicle3 = vehicleDirectory.addNewVehicle();
@@ -215,14 +205,14 @@ private void generateDemoData() {
 
         Owner newOwner4 = new Owner();
         newOwner4.setOwnerID(104);
-        newOwner4.setFirstName("Sara");
+        newOwner4.setFirstName("Mario");
         newOwner4.setLastName("Lopez");
         newOwner4.setServiceDate("2026-10-01");
 
         Vehicle newVehicle4 = vehicleDirectory.addNewVehicle();
         newVehicle4.setVehicleId(204);
         newVehicle4.setMake("Ford");
-        newVehicle4.setModel("Escape");
+        newVehicle4.setModel("Bronco");
         newVehicle4.setYear((short) 2020);
         newVehicle4.setRegistrationNumber("RI-5562");
         newVehicle4.setOwner(newOwner4);
@@ -230,8 +220,8 @@ private void generateDemoData() {
 
         Owner newOwner5 = new Owner();
         newOwner5.setOwnerID(105);
-        newOwner5.setFirstName("Tom");
-        newOwner5.setLastName("Reed");
+        newOwner5.setFirstName("Taylor");
+        newOwner5.setLastName("Swift");
         newOwner5.setServiceDate("2026-10-02");
 
         Vehicle newVehicle5 = vehicleDirectory.addNewVehicle();
