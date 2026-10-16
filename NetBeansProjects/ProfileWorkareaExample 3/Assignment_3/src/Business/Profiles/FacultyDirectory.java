@@ -38,7 +38,15 @@ public class FacultyDirectory {
             }
         }
             return null; //not found after going through the whole list
+            
          }
+       public void removeFacultyProfile(FacultyProfile fp) {
+        facultylist.remove(fp);
+    }
+
+    public ArrayList<FacultyProfile> getFacultyList() {
+        return facultylist;
+    }
     
     
     

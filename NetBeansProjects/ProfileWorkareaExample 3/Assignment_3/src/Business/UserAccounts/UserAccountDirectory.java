@@ -49,7 +49,20 @@ public class UserAccountDirectory {
             }
         }
             return null; //not found after going through the whole list
-         }   
+         } 
+     
+     public void removeUserAccount(UserAccount ua) {
+        useraccountlist.remove(ua);
+    }
+
+    public UserAccount findByUsername(String un) {
+        for (UserAccount ua : useraccountlist) {
+            if (ua.getUserLoginName().equalsIgnoreCase(un)) {
+                return ua;
+            }
+        }
+        return null;
+    }
      public ArrayList<UserAccount> getUserAccountList()
      {
          return useraccountlist;

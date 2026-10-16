@@ -38,5 +38,12 @@ public class PersonDirectory {
         }
             return null; //not found after going through the whole list
          }
+    public ArrayList<Person> getPersonList() {
+        return personlist;
+    }
+
+    public void removePerson(Person p) {
+        personlist.remove(p);
+    }
     
 }

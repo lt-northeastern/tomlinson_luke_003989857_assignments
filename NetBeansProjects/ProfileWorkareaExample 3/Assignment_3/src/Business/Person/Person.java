@@ -12,6 +12,8 @@ package Business.Person;
 public class Person {
 
     String id;
+    String firstName;
+    String lastName;
 
     public Person(String id) {
 
@@ -20,6 +22,23 @@ public class Person {
 
     public String getPersonId() {
         return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isMatch(String id) {
