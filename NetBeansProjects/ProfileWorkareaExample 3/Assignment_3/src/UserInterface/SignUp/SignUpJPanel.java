@@ -4,19 +4,28 @@
  */
 package UserInterface.SignUp;
 
+import Business.Business;
+import javax.swing.JPanel;
+
 /**
  *
  * @author luke
  */
 public class SignUpJPanel extends javax.swing.JPanel {
 
+     javax.swing.JPanel CardSequencePanel;
+    Business business;
+
     /**
-     * Creates new form SignUpJPanel
+     * Creates new form UnitRiskWorkArea
      */
-    public SignUpJPanel() {
+
+    public SignUpJPanel(Business b, JPanel clp) {
+
+        business = b;
+        this.CardSequencePanel = clp;
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +61,11 @@ public class SignUpJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnSignUp.setText("Sign Up");
 
@@ -110,6 +124,13 @@ public class SignUpJPanel extends javax.swing.JPanel {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
