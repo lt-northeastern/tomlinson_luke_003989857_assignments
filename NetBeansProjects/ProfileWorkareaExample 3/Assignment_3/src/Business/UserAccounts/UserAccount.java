@@ -100,6 +100,13 @@ public class UserAccount {
     public void markUpdated() {
         lastUpdated = new Date();
     }
+    
+    public String getStatus() {
+        if (lastAccessed == null) {
+            return "Inactive";
+        }
+        return "Active";
+    }
 
     @Override
     public String toString() {

@@ -6,6 +6,10 @@ package UserInterface.SignUp;
 
 import Business.Business;
 import javax.swing.JPanel;
+import Business.Person.Person;
+import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -68,6 +72,11 @@ public class SignUpJPanel extends javax.swing.JPanel {
         });
 
         btnSignUp.setText("Sign Up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,6 +140,50 @@ public class SignUpJPanel extends javax.swing.JPanel {
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        // TODO add your handling code here:
+        String nuid = txtNUID.getText().trim();
+        String un = txtUsername.getText().trim();
+        String pw = txtPassword.getText().trim();
+
+        // 1. All fields required
+        if (nuid.isEmpty() || un.isEmpty() || pw.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 2. NUID must be added by an admin first
+        Person person = business.getPersonDirectory().findPerson(nuid);
+        if (person == null) {
+            JOptionPane.showMessageDialog(this, "NUID has not been registered by an admin.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Student account must not already exist for this NUID
+        for (UserAccount ua : business.getUserAccountDirectory().getUserAccountList()) {
+            if (ua.getPersonId().equals(nuid) && ua.getAssociatedPersonProfile() instanceof StudentProfile) {
+                JOptionPane.showMessageDialog(this, "Student account already exists for this NUID.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // 4. Username must be unique
+        if (business.getUserAccountDirectory().findByUsername(un) != null) {
+            JOptionPane.showMessageDialog(this, "Username already taken, please choose a different one.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 5. Create student profile and account
+        StudentProfile sp = business.getStudentDirectory().newStudentProfile(person);
+        business.getUserAccountDirectory().newUserAccount(sp, un, pw);
+
+        JOptionPane.showMessageDialog(this, "Student account created! Please log in.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        txtNUID.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

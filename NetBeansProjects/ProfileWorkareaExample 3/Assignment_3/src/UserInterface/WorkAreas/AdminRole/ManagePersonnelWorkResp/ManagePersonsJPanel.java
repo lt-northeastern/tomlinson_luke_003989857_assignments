@@ -9,6 +9,8 @@ import Business.Business;
 
 
 import javax.swing.JPanel;
+import Business.Person.Person;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,6 +46,13 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         Next = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
+        lblNUID = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
+        txtLastName = new javax.swing.JTextField();
+        txtNUID = new javax.swing.JTextField();
+        btnRegister = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -55,7 +64,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(20, 260, 76, 32);
+        Back.setBounds(20, 260, 80, 23);
 
         Next.setText("Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -64,16 +73,43 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             }
         });
         add(Next);
-        Next.setBounds(500, 260, 80, 32);
+        Next.setBounds(500, 260, 80, 23);
 
         jLabel1.setText("Name");
         add(jLabel1);
-        jLabel1.setBounds(20, 60, 190, 16);
+        jLabel1.setBounds(20, 60, 190, 17);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Personnel (HR)");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
+
+        lblFirstName.setText("First Name");
+        add(lblFirstName);
+        lblFirstName.setBounds(110, 110, 70, 17);
+
+        lblLastName.setText("Last Name");
+        add(lblLastName);
+        lblLastName.setBounds(110, 140, 63, 17);
+
+        lblNUID.setText("NUID");
+        add(lblNUID);
+        lblNUID.setBounds(110, 170, 60, 17);
+        add(txtFirstName);
+        txtFirstName.setBounds(210, 110, 120, 23);
+        add(txtLastName);
+        txtLastName.setBounds(210, 140, 120, 23);
+        add(txtNUID);
+        txtNUID.setBounds(210, 170, 120, 23);
+
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        add(btnRegister);
+        btnRegister.setBounds(360, 110, 78, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -93,12 +129,50 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_NextActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        
+        String firstName = txtFirstName.getText().trim();
+        String lastName = txtLastName.getText().trim();
+        String nuid = txtNUID.getText().trim();
+
+        // 1. All fields required
+        if (firstName.isEmpty() || lastName.isEmpty() || nuid.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 2. NUID must be unique
+        if (business.getPersonDirectory().findPerson(nuid) != null) {
+            JOptionPane.showMessageDialog(this, "This NUID is already registered.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Create person
+        Person person = business.getPersonDirectory().newPerson(nuid);
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+
+        JOptionPane.showMessageDialog(this, "Person registered with NUID: " + nuid, "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtNUID.setText("");
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Next;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblNUID;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtNUID;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -7,6 +7,8 @@ package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
 import Business.UserAccounts.UserAccount;
 import javax.swing.JPanel;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 
 /**
  *h
@@ -28,7 +30,21 @@ public class AdminUserAccount extends javax.swing.JPanel {
         selecteduseraccount= sua;
         initComponents();
         //display user details here
+        
+        refreshTextFields();
 
+    }
+    
+    private void refreshTextFields() {
+        txtUsername.setText(selecteduseraccount.getUserLoginName());
+        txtPassword.setText(selecteduseraccount.getPassword());
+        txtRole.setText(selecteduseraccount.getRole());
+        if (selecteduseraccount.getLastAccessed() == null) {
+            txtLastActivity.setText("Never");
+        } else {
+            txtLastActivity.setText(selecteduseraccount.getLastAccessed().toString());
+        }
+        txtLastUpdated.setText(selecteduseraccount.getLastUpdated().toString());
     }
 
     /**
@@ -43,6 +59,16 @@ public class AdminUserAccount extends javax.swing.JPanel {
         Back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Back1 = new javax.swing.JButton();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
+        lblLastActivity = new javax.swing.JLabel();
+        lblLastUpdated = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        txtRole = new javax.swing.JTextField();
+        txtLastActivity = new javax.swing.JTextField();
+        txtLastUpdated = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -54,12 +80,12 @@ public class AdminUserAccount extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(480, 290, 100, 32);
+        Back.setBounds(360, 290, 100, 23);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Administer User Account");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
 
         Back1.setText("<< Back");
         Back1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,11 +94,62 @@ public class AdminUserAccount extends javax.swing.JPanel {
             }
         });
         add(Back1);
-        Back1.setBounds(40, 290, 100, 32);
+        Back1.setBounds(140, 290, 100, 23);
+
+        lblUsername.setText("Username");
+        add(lblUsername);
+        lblUsername.setBounds(90, 90, 59, 17);
+
+        lblPassword.setText("Password");
+        add(lblPassword);
+        lblPassword.setBounds(90, 120, 58, 17);
+
+        lblRole.setText("Role");
+        add(lblRole);
+        lblRole.setBounds(90, 150, 26, 17);
+
+        lblLastActivity.setText("Last Activity");
+        add(lblLastActivity);
+        lblLastActivity.setBounds(90, 180, 90, 17);
+
+        lblLastUpdated.setText("Last Updated");
+        add(lblLastUpdated);
+        lblLastUpdated.setBounds(90, 210, 80, 17);
+        add(txtUsername);
+        txtUsername.setBounds(210, 90, 220, 23);
+        add(txtPassword);
+        txtPassword.setBounds(210, 120, 220, 23);
+
+        txtRole.setEditable(false);
+        txtRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRoleActionPerformed(evt);
+            }
+        });
+        add(txtRole);
+        txtRole.setBounds(210, 150, 220, 23);
+
+        txtLastActivity.setEditable(false);
+        txtLastActivity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLastActivityActionPerformed(evt);
+            }
+        });
+        add(txtLastActivity);
+        txtLastActivity.setBounds(210, 180, 220, 23);
+
+        txtLastUpdated.setEditable(false);
+        add(txtLastUpdated);
+        txtLastUpdated.setBounds(210, 210, 220, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
+        selecteduseraccount.setUsername(txtUsername.getText().trim());       
+        selecteduseraccount.setPassword(txtPassword.getText().trim());       
+        selecteduseraccount.markUpdated();                                  
+
+        JOptionPane.showMessageDialog(this, "Account updated!", "Information", JOptionPane.INFORMATION_MESSAGE);    
 
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -87,11 +164,29 @@ public class AdminUserAccount extends javax.swing.JPanel {
 
     }//GEN-LAST:event_Back1ActionPerformed
 
+    private void txtRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRoleActionPerformed
+
+    private void txtLastActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastActivityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLastActivityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Back1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblLastActivity;
+    private javax.swing.JLabel lblLastUpdated;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblRole;
+    private javax.swing.JLabel lblUsername;
+    private javax.swing.JTextField txtLastActivity;
+    private javax.swing.JTextField txtLastUpdated;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtRole;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
 }

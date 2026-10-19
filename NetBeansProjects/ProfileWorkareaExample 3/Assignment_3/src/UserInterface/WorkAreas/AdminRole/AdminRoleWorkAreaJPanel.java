@@ -13,6 +13,8 @@ package UserInterface.WorkAreas.AdminRole;
 import Business.Business;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.CreateAccountJPanel;
+import Business.UserAccounts.UserAccount;
 
 import javax.swing.JPanel;
 
@@ -24,12 +26,19 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     javax.swing.JPanel CardSequencePanel;
     Business business;
+    UserAccount useraccount;
+
+    public void setUserAccount(UserAccount ua) {
+        useraccount = ua;
+    }
 
     /**
      * Creates new form UnitRiskWorkArea
      */
 
     public AdminRoleWorkAreaJPanel(Business b, JPanel clp) {
+        
+        
 
         business = b;
         this.CardSequencePanel = clp;
@@ -181,14 +190,21 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        CreateAccountJPanel cap = new CreateAccountJPanel(business, CardSequencePanel);
+        CardSequencePanel.add("CreateAccount", cap);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
-    }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
+AdminProfileJPanel app = new AdminProfileJPanel(useraccount, CardSequencePanel);
+        CardSequencePanel.add("AdminProfile", app);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);    }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    }//GEN-LAST:event_jButton9ActionPerformed
+        CreateAccountJPanel cap = new CreateAccountJPanel(business, CardSequencePanel);
+        CardSequencePanel.add("CreateAccount", cap);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

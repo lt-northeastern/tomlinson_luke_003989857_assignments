@@ -12,6 +12,8 @@ import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
+import Business.Profiles.FacultyDirectory;
+import Business.Profiles.FacultyProfile;
 
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
@@ -30,9 +32,9 @@ class ConfigureABusiness {
       PersonDirectory persondirectory = business.getPersonDirectory();
 // person representing sales organization        
         Person person001 = persondirectory.newPerson("John Smith");
-        Person person002 = persondirectory.newPerson("Gina Montana");
+        Person person002 = persondirectory.newPerson("Luke Tomlinson");
         Person person003 = persondirectory.newPerson("Adam Rollen");
- 
+
         Person person005 = persondirectory.newPerson("Jim Dellon");
         Person person006 = persondirectory.newPerson("Anna Shnider");
         Person person007 = persondirectory.newPerson("Laura Brown");
@@ -42,17 +44,27 @@ class ConfigureABusiness {
 // Create Admins to manage the business
         EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
         EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(person001);
-        
+
+        FacultyDirectory facultydirectory = business.getFacultyDirectory();
+        FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person002);
+
         StudentDirectory studentdirectory = business.getStudentDirectory();
         StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003);
-        
 
-
-   
 // Create User accounts that link to specific profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
         UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); /// order products for one of the customers and performed by a sales person
+        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "luke", "****");
+
+        person001.setFirstName("John");
+        person001.setLastName("Smith");
+        person003.setFirstName("Adam");
+        person003.setLastName("Rollen");
+        employeeprofile0.setPhone("999-999-9999");
+        employeeprofile0.setEmail("john.smith@university.edu");
+        employeeprofile0.setDepartment("Administration");
+        employeeprofile0.setTitle("System Admin");
 
         return business;
 
