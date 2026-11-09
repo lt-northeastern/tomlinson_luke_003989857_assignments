@@ -74,17 +74,31 @@ public class Order {
     //sum all the item targets and compare to the total of the order 
     public boolean isOrderAboveTotalTarget(){
         int sum = 0;
-        for (OrderItem oi: orderitems){
+        for (OrderItem oi : orderitems) {
             sum = sum + oi.getOrderItemTargetTotal(); //product targets are added
         }
-        if(getOrderTotal()>sum) {return true;}
-        else {return false;}
-        
+        if (getOrderTotal() > sum) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
-public void CancelOrder(){
-    status = "Cancelled";
-}
-public void Submit(){
-    status = "Submitted";
-}
+
+    // Assignment 9 - Report 3
+    public ArrayList<OrderItem> getOrderItems() {
+        return orderitems;
+    }
+
+    public CustomerProfile getCustomer() {
+        return customer;
+    }
+
+    public void CancelOrder() {
+        status = "Cancelled";
+    }
+
+    public void Submit() {
+        status = "Submitted";
+    }
 }

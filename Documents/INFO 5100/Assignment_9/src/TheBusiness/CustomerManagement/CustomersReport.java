@@ -14,10 +14,16 @@ import java.util.ArrayList;
 public class CustomersReport {
     ArrayList<CustomerSummary> customerlist;
     
-    public CustomersReport(){
-        
+  public CustomersReport(){
+        customerlist = new ArrayList();
     }
     public void addCustomerSummary(CustomerSummary cs){
-        
+        customerlist.add(cs);
+    }
+
+    // Assignment 9 - Report 2: customers sorted from highest total sales to lowest
+    public ArrayList<CustomerSummary> getCustomersSortedBySales() {
+        customerlist.sort((a, b) -> b.getOrderTotal() - a.getOrderTotal());
+        return customerlist;
     }
 }

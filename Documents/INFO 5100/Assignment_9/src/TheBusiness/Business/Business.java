@@ -20,6 +20,8 @@ import TheBusiness.SolutionOrders.MasterSolutionOrderList;
 import TheBusiness.SalesManagement.SalesPersonDirectory;
 import TheBusiness.Supplier.Supplier;
 import TheBusiness.Supplier.SupplierDirectory;
+import TheBusiness.Supplier.SupplierReport;
+import TheBusiness.Supplier.SupplierSummary;
 import TheBusiness.UserAccountManagement.UserAccountDirectory;
 
 /**
@@ -114,8 +116,21 @@ public class Business {
         int i = productsreport.getProductsAlwaysAboveTarget().size(); //return size of the arraylist
         return i;
     }
+    
+
+    // Assignment 9 - Report 3: one SupplierSummary per supplier
+    public SupplierReport generateSupplierReport() {
+        SupplierReport supplierreport = new SupplierReport();
+        int numberofcustomers = customerdirectory.getCustomerList().size();
+        for (Supplier supplier : suppliers.getSuplierList()) {
+            SupplierSummary ss = new SupplierSummary(supplier, masterorderlist, numberofcustomers);
+            supplierreport.addSupplierSummary(ss);
+        }
+        return supplierreport;
+    }
 
     public CustomerDirectory getCustomerDirectory() {
+        
         return customerdirectory;
     }
 

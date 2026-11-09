@@ -84,6 +84,15 @@ public class CustomerProfile extends Profile {
         return person.getPersonId();
     }
 
+    // Assignment 9 - Report 2: total sales to this customer (all orders added up)
+    public int getTotalSales() {
+        int sum = 0;
+        for (Order o : orders) {
+            sum = sum + o.getOrderTotal();
+        }
+        return sum;
+    }
+    
     public Person getPerson() {
         return person;
     }
