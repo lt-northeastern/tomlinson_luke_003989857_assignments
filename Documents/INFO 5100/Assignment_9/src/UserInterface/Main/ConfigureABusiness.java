@@ -5,6 +5,7 @@
  */
 package UserInterface.Main;
 
+
 import MarketingManagement.MarketingPersonDirectory;
 import MarketingManagement.MarketingPersonProfile;
 import TheBusiness.Business.Business;
@@ -23,6 +24,8 @@ import TheBusiness.Supplier.Supplier;
 import TheBusiness.Supplier.SupplierDirectory;
 import TheBusiness.UserAccountManagement.UserAccount;
 import TheBusiness.UserAccountManagement.UserAccountDirectory;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -119,9 +122,55 @@ class ConfigureABusiness {
         OrderItem oi16 = order1.newOrderItem(products1p6, 95000, 2);
         OrderItem oi17 = order1.newOrderItem(products1p7, 26500, 3);
         OrderItem oi18 = order1.newOrderItem(products1p8, 40000, 2);
+        
+        populateRandomData(business, salespersonprofile);
 
         return business;
 
+    }
+     // Assignment 9 - fill the model with random data
+    static void populateRandomData(Business business, SalesPersonProfile salesperson) {
+        Random random = new Random();
+        PersonDirectory persondirectory = business.getPersonDirectory();
+        SupplierDirectory supplierdirectory = business.getSupplierDirectory();
+        CustomerDirectory customerdirectory = business.getCustomerDirectory();
+        MasterOrderList masterorderlist = business.getMasterOrderList();
+        ArrayList<Product> allproducts = new ArrayList();
+
+        // Lenovo and Epson already exist. add 48 more
+        // first 30 new suppliers get 50 products each
+        for (int s = 1; s <= 48; s++) {
+            Supplier supplier = supplierdirectory.newSupplier("Supplier " + s);
+            if (s <= 30) {
+                ProductCatalog catalog = supplier.getProductCatalog();
+                for (int p = 1; p <= 50; p++) {
+                    int target = 1000 + random.nextInt(49000);              // 1,000 - 49,999
+                    int floor = target - random.nextInt(target / 2);        // below target
+                    int ceiling = target + random.nextInt(target / 2) + 1;  // above target
+                    Product product = catalog.newProduct("Product " + s + "-" + p, floor, ceiling, target);
+                    allproducts.add(product);
+                }
+            }
+        }
+
+        // 300 customers  each with 1-3 orders of 1-10 items
+        for (int c = 1; c <= 300; c++) {
+            Person person = persondirectory.newPerson("Customer " + c);
+            CustomerProfile customer = customerdirectory.newCustomerProfile(person);
+
+            int numberoforders = 1 + random.nextInt(3);                     // 1 - 3
+            for (int o = 1; o <= numberoforders; o++) {
+                Order order = masterorderlist.newOrder(customer, salesperson);
+
+                int numberofitems = 1 + random.nextInt(10);                 // 1 - 10
+                for (int i = 1; i <= numberofitems; i++) {
+                    Product product = allproducts.get(random.nextInt(allproducts.size()));
+                    int price = product.getFloorPrice() + random.nextInt(product.getCeilingPrice() - product.getFloorPrice() + 1);
+                    int quantity = 1 + random.nextInt(5);                   // 1 - 5
+                    order.newOrderItem(product, price, quantity);
+                }
+            }
+        }
     }
 
 }
